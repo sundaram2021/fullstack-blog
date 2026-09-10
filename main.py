@@ -75,6 +75,28 @@ class SessionChatRequest(BaseModel):
     user_id: str = "anonymous"
 
 
+# User models
+class UserCreate(BaseModel):
+    username: str
+    email: str
+
+
+class UserUpdate(BaseModel):
+    username: str | None = None
+    email: str | None = None
+
+
+class UserRead(BaseModel):
+    id: int
+    username: str
+    email: str
+
+
+# In-memory user store
+_users: dict[int, UserRead] = {}
+_next_id = 1
+
+
 # Prompt templates for template-version tracking (see /pipeline).
 _grounded_system_template = SystemPromptTemplate([
     {"role": "system", "content": "Answer using this context:\n{{context}}"},
@@ -336,6 +358,49 @@ def session_chat(payload: SessionChatRequest):
     return {"reply": response.choices[0].message.content,
             "model": MODEL_NAME,
             "session_id": payload.session_id or "demo-session"}
+
+
+# ---------- User CRUD routes ----------
+@web_app.post("/users/")
+def create_user(user: UserCreate):
+    global _next_id
+    user_id = _next_id
+    _next_id += 1
+    user_read = UserRead(id=user_id, username=user.username, email=user.email)
+    _users[user_id] = user_read
+    return user_read
+
+
+@web_app.get("/users/")
+def list_users():
+    return list(_users.values())
+
+
+@web_app.get("/users/{user_id}")
+def get_user(user_id: int):
+    if user_id not in _users:
+        raise HTTPException(status_code=404, detail="User not found")
+    return _users[user_id]
+
+
+@web_app.put("/users/{user_id}")
+def update_user(user_id: int, user_update: UserUpdate):
+    if user_id not in _users:
+        raise HTTPException(status_code=404, detail="User not found")
+    existing = _users[user_id]
+    if user_update.username is not None:
+        existing.username = user_update.username
+    if user_update.email is not None:
+        existing.email = user_update.email
+    return existing
+
+
+@web_app.delete("/users/{user_id}")
+def delete_user(user_id: int):
+    if user_id not in _users:
+        raise HTTPException(status_code=404, detail="User not found")
+    del _users[user_id]
+    return {"detail": "User deleted"}
 
 
 # ---------- Route 3: tool-calling loop endpoint ----------
