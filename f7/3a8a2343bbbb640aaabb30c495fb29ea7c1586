@@ -1,0 +1,20 @@
+main.py
+  s_d1d4009435e94d::t_d49ba42070fd8e 78-99
+  s_d1d4009435e94d::t_8139e9bcc79f5f 363-405
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f73a8a2343bbbb640aaabb30c495fb29ea7c1586",
+  "prompts": {},
+  "sessions": {
+    "s_d1d4009435e94d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f7535efcfffehfDXZYU41HQFhE",
+        "model": "unknown"
+      },
+      "human_author": "Sundaram Kumar Jha <jhasundaram@outlook.com>"
+    }
+  }
+}
