@@ -1,0 +1,20 @@
+hello.html
+  s_19b3960cf8cd21::t_16d49d90f57101 1-14,16-20
+  s_19b3960cf8cd21::t_1df25d85a6033a 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "238852c0842e00a3a4b6043d8ee426e70adb12a5",
+  "prompts": {},
+  "sessions": {
+    "s_19b3960cf8cd21": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f757cdffdffe5kV5YGbH16Br05",
+        "model": "unknown"
+      },
+      "human_author": "Sundaram Kumar Jha <jhasundaram@outlook.com>"
+    }
+  }
+}
