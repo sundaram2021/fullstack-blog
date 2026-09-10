@@ -1,0 +1,14 @@
+[project]
+name = "fullstack-blog"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.141.1",
+    "modal>=1.5.5",
+    "neatlogs>=1.4.21",
+    "openai>=3.8.0",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.52.4",
+]

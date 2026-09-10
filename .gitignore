@@ -1,0 +1,7 @@
+*/node_modules/
+dist/
+*.log
+# NeatLogs tracing key (secret, never commit)
+neatlogs.env
+
+.agents
